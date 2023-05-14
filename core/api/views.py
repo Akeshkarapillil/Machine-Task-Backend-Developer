@@ -183,7 +183,7 @@ class UpdateAPI(APIView):
             return Response({
                 "status": 200,
                 "message": "Successfully updated.",
-                "data": {response.data}
+                "data": {}
             })
 
 
