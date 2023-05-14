@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+import json
 
 from .serializers import *
 from core.models import *
@@ -216,31 +217,29 @@ class DeleteAPI(APIView):
 class TagListAPI(APIView):
     
     def get(self, request):
-        tag = TagModel.objects.all()
-
-        response = TagModelSerializer(tag)
+        queryset = TagModel.objects.all()
+        response = TagModelSerializer(queryset, many=True)
+        print(response.data)
         return Response({
                 "status": 200,
                 "message": "Found",
-                "data": {response.data}
+                "data": response.data
             })
 
 class TagDetailAPI(APIView):
     
     def get(self, request, id):
         tag = TagModel.objects.filter(id=id).first()
-
         if tag is None:
             return Response({
                 "status": 404,
                 "message": "Not Found!",
-                "data": {response.data}
             })
 
         response = TagModelSerializer(tag)
         return Response({
                 "status": 200,
                 "message": "Found",
-                "data": {response.data}
+                "data": response.data
             })
 

@@ -19,5 +19,5 @@ urlpatterns = [
     path('update/<int:id>', UpdateAPI.as_view()),
     path('delete/<int:id>', DeleteAPI.as_view()),
     path('tag/', TagListAPI.as_view()),
-    path('tag/detail/', TagDetailAPI.as_view()),
+    path('tag/detail/<int:id>', TagDetailAPI.as_view()),
 ]
